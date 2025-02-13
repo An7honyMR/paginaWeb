@@ -1,1 +1,31 @@
-<p>clima works!</p>
+<div class="container">
+    <div class="weather-card mx-auto">
+        <h3 class="mb-4">🌤️ Clima en tu Ciudad</h3>
+
+        <!-- Búsqueda de Ciudad -->
+        <div class="input-group mb-3">
+            <input type="text" [(ngModel)]="ciudad" class="form-control" placeholder="Ingrese una ciudad">
+            <button class="btn btn-primary" (click)="consultarClima()">Buscar</button>
+        </div>
+
+        <!-- Información del Clima -->
+        <div *ngIf="clima">
+            <img [src]="clima.weather[0].iconUrl" class="weather-icon" alt="Icono clima">
+            <h2>{{ ciudad }}</h2>
+            <p class="temp">{{ clima.main.temp }}°C</p>
+            <p class="info">{{ clima.weather[0].description }}</p>
+            <p class="info"><strong>Humedad:</strong> {{ clima.main.humidity }}%</p>
+            <p class="info"><strong>Viento:</strong> {{ clima.wind.speed }} km/h</p>
+        </div>
+    </div>
+
+    <!-- Pronóstico -->
+    <h4 class="text-center mt-4">Pronóstico para los próximos días</h4>
+    <div class="forecast mt-3">
+        <div class="forecast-day" *ngFor="let day of pronostico">
+            <p>{{ day.fecha }}</p>
+            <img [src]="day.iconUrl" class="weather-icon" alt="Icono clima">
+            <p>{{ day.temp }}°C</p>
+        </div>
+    </div>
+</div>

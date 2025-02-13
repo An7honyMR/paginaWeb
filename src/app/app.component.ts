@@ -1,12 +1,38 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { ClimaService } from './services/clima.service';
+import { Clima } from './models/clima';
+import { ClimaComponent } from './shared/clima/clima.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'],
+  imports: [CommonModule, ClimaComponent]
 })
 export class AppComponent {
-  title = 'paginaWeb';
+  title = 'ClimaApp';
+  city: string = '';
+  climaData?: Clima;
+
+  constructor(private climaService: ClimaService) {}
+
+  fetchClima() {
+    if (this.city.trim() === '') {
+      alert('Por favor, ingrese una ciudad.');
+      return;
+    }
+
+    this.climaService.getClima(this.city).subscribe({
+      next: (data) => {
+        console.log('Datos del clima recibidos:', data); // 🔍 Ver datos recibidos
+        this.climaData = data;
+      },
+      error: (err) => {
+        console.error('Error al obtener datos:', err);
+        alert('No se pudo obtener el clima. Intente con otra ciudad.');
+      }
+    });
+  }
 }
