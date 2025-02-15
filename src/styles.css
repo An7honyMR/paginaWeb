@@ -69,3 +69,52 @@ body {
     text-align: center;
     width: 18%;
 }
+
+/* Estilos para el contenedor del mapa */
+#map {
+    height: 500px; /* Altura fija para el mapa */
+    width: 100%;   /* Ancho completo del contenedor */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    margin-bottom: 20px; /* Espacio inferior */
+  }
+  
+  /* Estilos para el contenedor principal del mapa */
+  .mapa-container {
+    padding: 20px; /* Espaciado interno */
+    background-color: #f9f9f9; /* Fondo claro */
+    border-radius: 10px; /* Bordes redondeados */
+    margin: 20px auto; /* Centrar el contenedor */
+    max-width: 1200px; /* Ancho máximo */
+  }
+  
+  /* Estilos para los controles del mapa (opcional) */
+  .leaflet-control {
+    background-color: white;
+    padding: 5px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Estilos para los botones de zoom (opcional) */
+  .leaflet-control-zoom-in,
+  .leaflet-control-zoom-out {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Estilos para el popup del mapa (opcional) */
+  .leaflet-popup-content {
+    font-size: 14px;
+    color: #333;
+  }
+  
+  /* Estilos para el footer (opcional) */
+  .footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    margin-top: 20px;
+  }

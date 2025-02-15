@@ -14,10 +14,12 @@ import { ClimaService } from '../../services/clima.service';
 export class ClimaComponent {
   ciudad: string = '';
   clima: any = null;
-  pronostico: any[] = []; // Define la propiedad 'pronostico'
+  pronostico: any[] = [];
   error: string | null = null;
 
-  constructor(private climaService: ClimaService) {}
+  constructor(
+    private climaService: ClimaService
+  ) {}
 
   consultarClima() {
     if (this.ciudad.trim() === '') {
@@ -30,7 +32,7 @@ export class ClimaComponent {
         this.clima = data;
         this.error = null;
 
-        // Simula datos de pronóstico (puedes reemplazar esto con una llamada a la API)
+        // Simula datos de pronóstico
         this.pronostico = [
           { fecha: 'Lun', temp: 25, iconUrl: 'https://cdn-icons-png.flaticon.com/512/1163/1163661.png' },
           { fecha: 'Mar', temp: 27, iconUrl: 'https://cdn-icons-png.flaticon.com/512/1163/1163661.png' },

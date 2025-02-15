@@ -3,8 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Clima } from '../models/clima';
 
-
-
 @Injectable({
   providedIn: 'root'
 })
