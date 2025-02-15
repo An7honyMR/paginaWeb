@@ -1,0 +1,8 @@
+<div class="container">
+    <h1>Bienvenido a ClimaApp</h1>
+    <div>
+        <label for="ciudad">Ingrese una ciudad</label>
+        <input type="text" id="ciudad" placeholder="Ej. Buenos Aires" class="form-control" [(ngModel)] ="ciudad"/>
+    </div>
+    <button class="btn btn-primary" (click)="buscarCiudad()">Buscar</button>
+</div>

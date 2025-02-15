@@ -32,7 +32,7 @@ export class ClimaComponent {
         this.clima = data;
         this.error = null;
 
-        // Simula datos de pronóstico
+        // Simula datos de pronóstico (puedes reemplazar esto con una llamada a la API)
         this.pronostico = [
           { fecha: 'Lun', temp: 25, iconUrl: 'https://cdn-icons-png.flaticon.com/512/1163/1163661.png' },
           { fecha: 'Mar', temp: 27, iconUrl: 'https://cdn-icons-png.flaticon.com/512/1163/1163661.png' },

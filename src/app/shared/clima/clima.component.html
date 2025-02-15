@@ -11,7 +11,7 @@
         <!-- Información del Clima -->
         <div *ngIf="clima">
             <img [src]="clima.weather[0].iconUrl" class="weather-icon" alt="Icono clima">
-            <h2>{{ ciudad }}</h2>
+            <h2>{{ clima.name }}</h2>
             <p class="temp">{{ clima.main.temp }}°C</p>
             <p class="info">{{ clima.weather[0].description }}</p>
             <p class="info"><strong>Humedad:</strong> {{ clima.main.humidity }}%</p>

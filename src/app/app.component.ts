@@ -3,13 +3,14 @@ import { ClimaService } from './services/clima.service';
 import { Clima } from './models/clima';
 import { ClimaComponent } from './shared/clima/clima.component';
 import { WeatherMapComponent } from './shared/weather-map/weather-map.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  imports: [ClimaComponent, WeatherMapComponent]
+  imports: [ClimaComponent, WeatherMapComponent, RouterModule],
 })
 export class AppComponent {
   title = 'ClimaApp';
@@ -26,7 +27,7 @@ export class AppComponent {
 
     this.climaService.getClima(this.city).subscribe({
       next: (data) => {
-        console.log('Datos del clima recibidos:', data); // 🔍 Ver datos recibidos
+        console.log('Datos del clima recibidos:', data);
         this.climaData = data;
       },
       error: (err) => {
