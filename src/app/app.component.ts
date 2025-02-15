@@ -3,13 +3,14 @@ import { ClimaService } from './services/clima.service';
 import { Clima } from './models/clima';
 import { ClimaComponent } from './shared/clima/clima.component';
 import { CommonModule } from '@angular/common';
+import { MapaComponent } from './shared/mapa/mapa.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  imports: [CommonModule, ClimaComponent]
+  imports: [CommonModule, ClimaComponent, MapaComponent]
 })
 export class AppComponent {
   title = 'ClimaApp';
