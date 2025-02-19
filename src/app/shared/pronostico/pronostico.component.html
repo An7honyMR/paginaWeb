@@ -1,0 +1,49 @@
+<div class="forecast-container">
+    <div class="pronostico-container">
+        <h2>Pronóstico del Clima en {{ city }}</h2>
+
+        <div *ngIf="weatherData && weatherData.list">
+            <h3 class="temperature">Temperatura actual: {{ weatherData.list[0].main.temp }}°C</h3>
+            <div class="weather-info">
+                <p>🌡️ <strong>Humedad:</strong> {{ weatherData.list[0].main.humidity }}%</p>
+                <p>💨 <strong>Viento:</strong> {{ weatherData.list[0].wind.speed }} m/s</p>
+                <p>🌧️ <strong>Estado:</strong> {{ weatherData.list[0].weather[0].description }}</p>
+            </div>
+
+            <h3>Pronóstico de los próximos días</h3>
+            <div class="forecast-grid">
+                <ng-container *ngFor="let item of weatherData.list; let i = index">
+                    <div *ngIf="i % 8 === 0" class="forecast-card">
+                        <img [src]="'https://openweathermap.org/img/wn/' + item.weather[0].icon + '@2x.png'" alt="icono del clima">
+                        <p class="forecast-date">{{ item.dt_txt | date: 'EEEE, dd MMMM yyyy' }}</p>
+                        <p class="forecast-temp">{{ item.main.temp }}°C</p>
+                        <p class="forecast-desc">{{ item.weather[0].description }}</p>
+                    </div>
+                </ng-container>
+            </div>
+
+            <!-- Información adicional -->
+            <div class="additional-info mt-4">
+                <h3>Información adicional</h3>
+                <div class="info-item">
+                    <span class="info-title">Sensación Térmica:</span>
+                    <span class="info-value">{{ weatherData.list[0].main.feels_like }}°C</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-title">Probabilidad de Lluvia:</span>
+                    <span class="info-value">{{ weatherData.list[0].pop ? (weatherData.list[0].pop * 100) : 0 }}%</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-title">Presión Atmosférica:</span>
+                    <span class="info-value">{{ weatherData.list[0].main.pressure }} hPa</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-title">Última Actualización:</span>
+                    <span class="info-value">{{ weatherData.list[0].dt_txt | date: 'hh:mm a' }}</span>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-primary mt-3" (click)="volverAClima()">Volver</button>
+    </div>
+</div>

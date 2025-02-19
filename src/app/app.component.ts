@@ -4,13 +4,14 @@ import { Clima } from './models/clima';
 import { ClimaComponent } from './shared/clima/clima.component';
 import { WeatherMapComponent } from './shared/weather-map/weather-map.component';
 import { RouterModule } from '@angular/router';
+import { PronosticoComponent } from './shared/pronostico/pronostico.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  imports: [ClimaComponent, WeatherMapComponent, RouterModule],
+  imports: [ClimaComponent, WeatherMapComponent, RouterModule, PronosticoComponent],
 })
 export class AppComponent {
   title = 'ClimaApp';

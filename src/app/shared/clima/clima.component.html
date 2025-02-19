@@ -10,7 +10,7 @@
 
         <!-- Información del Clima -->
         <div *ngIf="clima">
-            <img [src]="clima.weather[0].iconUrl" class="weather-icon" alt="Icono clima">
+            <img [src]="'https://openweathermap.org/img/wn/' + clima.weather[0].icon + '@2x.png'" class="weather-icon" alt="Icono clima">
             <h2>{{ clima.name }}</h2>
             <p class="temp">{{ clima.main.temp }}°C</p>
             <p class="info">{{ clima.weather[0].description }}</p>
@@ -19,13 +19,13 @@
         </div>
     </div>
 
-    <!-- Pronóstico -->
-    <h4 class="text-center mt-4">Pronóstico para los próximos días</h4>
-    <div class="forecast mt-3">
-        <div class="forecast-day" *ngFor="let day of pronostico">
-            <p>{{ day.fecha }}</p>
-            <img [src]="day.iconUrl" class="weather-icon" alt="Icono clima">
-            <p>{{ day.temp }}°C</p>
-        </div>
+    <!-- Botón para ver el pronóstico completo, solo aparece si se ha realizado la búsqueda -->
+    <div *ngIf="isSearched">
+        <button class="btn btn-secondary mt-3" (click)="verPronosticoCompleto()">Pronóstico completo</button>
+    </div>
+
+    <!-- Mostrar error si no se pudo obtener el clima -->
+    <div *ngIf="error" class="error-message">
+        <p>{{ error }}</p>
     </div>
 </div>

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ClimaService } from '../../services/clima.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-clima',
@@ -16,9 +17,11 @@ export class ClimaComponent {
   clima: any = null;
   pronostico: any[] = [];
   error: string | null = null;
+  isSearched: boolean = false; // Agregado para controlar la visibilidad del botón
 
   constructor(
-    private climaService: ClimaService
+    private climaService: ClimaService,
+    private router: Router
   ) {}
 
   consultarClima() {
@@ -31,6 +34,7 @@ export class ClimaComponent {
       (data: any) => {
         this.clima = data;
         this.error = null;
+        this.isSearched = true;
 
         // Simula datos de pronóstico (puedes reemplazar esto con una llamada a la API)
         this.pronostico = [
@@ -48,4 +52,12 @@ export class ClimaComponent {
       }
     );
   }
+
+  verPronosticoCompleto() {
+    if (this.ciudad) {
+      this.router.navigate(['/pronostico'], { queryParams: { ciudad: this.ciudad } });
+    }
+  }
+
+
 }
