@@ -5,8 +5,18 @@ body {
     font-family: Arial, sans-serif;
 }
 
+main {
+    margin-left: 225px;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
 .sidebar {
-    height: 100vh;
+    position: fixed;
+    min-height: 100vh;
+    top: 0;
+    left: 0;
     background: #343a40;
     color: white;
     padding-top: 20px;
@@ -51,7 +61,6 @@ body {
     color: white;
     text-align: center;
     padding: 10px;
-    position: fixed;
     bottom: 0;
     width: 100%;
 }

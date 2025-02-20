@@ -1,24 +1,24 @@
 <div class="container-fluid">
-    <div class="row">
-      <!-- Sidebar -->
-      <nav class="col-md-2 d-none d-md-block sidebar">
-        <h4 class="text-center">☁️ ClimaApp</h4>
-        <ul class="nav flex-column">
-          <li class="nav-item"><a routerLink="/">🌍 Inicio</a></li>
-          <li class="nav-item"><a routerLink="/clima">🌡️ Clima</a></li>
-          <li class="nav-item"><a routerLink="/mapa">🗺️ Mapa</a></li>
-          <li class="nav-item"><a routerLink="/pronostico">📅 Pronóstico</a></li>
-          <li class="nav-item"><a href="#">🔧 Configuración</a></li>
-        </ul>
-      </nav>
-  
-      <!-- Contenido Principal -->
-      <main class="col-md-10 p-4">
-        <router-outlet></router-outlet> <!-- Aquí se renderizarán los componentes según la ruta -->
-      </main>
-    </div>
+  <div class="row">
+    <!-- Sidebar -->
+    <nav class="col-md-2 d-none d-md-block sidebar">
+      <h4 class="text-center">☁️ ClimaApp</h4>
+      <ul class="nav flex-column">
+        <li class="nav-item"><a routerLink="/">🌍 Inicio</a></li>
+        <li class="nav-item"><a routerLink="/clima">🌡️ Clima</a></li>
+        <li class="nav-item"><a routerLink="/mapa">🗺️ Mapa</a></li>
+        <li class="nav-item"><a routerLink="/pronostico">📅 Pronóstico</a></li>
+        <li class="nav-item"><a href="#">🔧 Configuración</a></li>
+      </ul>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <main class="col-md-10 p-4">
+      <router-outlet></router-outlet> <!-- Aquí se renderizarán los componentes según la ruta -->
+    </main>
   </div>
-  
-  <footer class="footer">
-    <p>🌎 ClimaApp | Datos proporcionados por OpenWeatherMap</p>
-  </footer>
+</div>
+
+<footer class="footer">
+  <p>🌎 ClimaApp | Datos proporcionados por OpenWeatherMap</p>
+</footer>
