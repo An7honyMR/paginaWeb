@@ -65,6 +65,12 @@ main {
     width: 100%;
 }
 
+.footer p {
+    text-align: right; /* Asegurar que el texto esté alineado a la derecha */
+    margin: 0; /* Evitar márgenes inesperados */
+    padding-right: 20px;
+}
+
 .forecast {
     display: flex;
     justify-content: space-between;
@@ -127,3 +133,70 @@ main {
     color: white;
     margin-top: 20px;
   }
+
+
+
+.home-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Separa encabezado y contenido */
+    align-items: center;
+    height: 100vh;
+    padding: 5px 0; /* Espacio superior e inferior */
+}
+
+.header {
+    text-align: center;
+    margin-top: 20px; /* Espacio desde el margen superior */
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: #555;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1; /* Centra verticalmente el contenido */
+}
+
+.search-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.search-box input {
+    width: 400px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.btn-search {
+    padding: 10px 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    background: linear-gradient(90deg, #24a1ff, #c65afc);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-search:hover {
+    transform: scale(1.05);
+}

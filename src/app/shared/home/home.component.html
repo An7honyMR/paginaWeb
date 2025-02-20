@@ -1,8 +1,20 @@
-<div class="container">
-    <h1>Bienvenido a ClimaApp</h1>
-    <div>
-        <label for="ciudad">Ingrese una ciudad</label>
-        <input type="text" id="ciudad" placeholder="Ej. Buenos Aires" class="form-control" [(ngModel)] ="ciudad"/>
+<div class="home-container">
+    <!-- Encabezado -->
+    <div class="header">
+        <div>
+        <img src="ClimaApp.png"/>
+        </div>
+        <div>
+        <img src="Frase.png"/>
+        </div>
     </div>
-    <button class="btn btn-primary" (click)="buscarCiudad()">Buscar</button>
+
+    <!-- Buscador (Siempre centrado verticalmente) -->
+    <div class="content">
+        <div class="search-box">
+            <input type="text" id="ciudad" placeholder="Ingrese una ciudad" class="form-control" [(ngModel)]="ciudad"/>
+            <button class="btn-search" (click)="buscarCiudad()">BUSCAR</button>
+        </div>
+    </div>
 </div>
+
