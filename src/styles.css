@@ -162,6 +162,7 @@ main {
 }
 
 .content {
+    padding-top: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -170,6 +171,7 @@ main {
 }
 
 .search-box {
+    padding-top: 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -200,3 +202,225 @@ main {
 .btn-search:hover {
     transform: scale(1.05);
 }
+
+
+
+
+/* Estilos específicos para el componente de pronóstico */
+.forecast-container {
+    margin: 20px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .pronostico-container {
+    position: relative;
+  }
+  
+  .pronostico-container h2 {
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 25px;
+    color: #343a40;
+    font-weight: bold;
+  }
+  
+  .temperature {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 20px 0;
+    color: #24a1ff;
+  }
+  
+  .weather-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+  }
+  
+  .weather-info p {
+    margin: 10px 15px;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .weather-info strong {
+    margin-left: 5px;
+    font-weight: bold;
+    color: #343a40;
+  }
+  
+  h3 {
+    font-size: 1.8rem;
+    text-align: center;
+    margin: 25px 0 20px;
+    color: #343a40;
+  }
+  
+  .forecast-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 15px;
+    margin: 20px 0;
+  }
+  
+  .forecast-card {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    flex: 1;
+    min-width: 150px;
+    max-width: 200px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .forecast-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  }
+  
+  .forecast-card img {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    display: block;
+  }
+  
+  .forecast-date {
+    font-size: 0.9rem;
+    color: #555;
+    margin: 10px 0;
+  }
+  
+  .forecast-temp {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #24a1ff;
+    margin: 10px 0;
+  }
+  
+  .forecast-desc {
+    font-size: 1rem;
+    color: #343a40;
+    text-transform: capitalize;
+  }
+  
+  .additional-info {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 30px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .info-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 15px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .info-item:last-child {
+    border-bottom: none;
+  }
+  
+  .info-title {
+    font-size: 1.1rem;
+    color: #343a40;
+  }
+  
+  .info-value {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #24a1ff;
+  }
+  
+  .btn-primary {
+    padding: 10px 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    background: linear-gradient(90deg, #24a1ff, #c65afc);
+    cursor: pointer;
+    transition: 0.3s;
+    display: block;
+    margin: 30px auto 10px;
+  }
+  
+  .btn-primary:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .mt-3 {
+    margin-top: 1rem;
+  }
+  
+  .mt-4 {
+    margin-top: 1.5rem;
+  }
+  
+  /* Spinner de carga */
+  .loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+  }
+  
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(36, 161, 255, 0.2);
+    border-left-color: #24a1ff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .forecast-grid {
+      justify-content: center;
+    }
+    
+    .forecast-card {
+      min-width: 140px;
+      margin-bottom: 15px;
+    }
+    
+    .weather-info {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .weather-info p {
+      margin: 8px 0;
+    }
+    
+    .temperature {
+      font-size: 2rem;
+    }
+  }
