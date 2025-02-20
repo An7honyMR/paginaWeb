@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ClimaService } from '../../services/clima.service';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { WeatherForecast } from '../../models/weather';
+import { WeatherService } from '../../services/weather.service';
 
 @Component({
   selector: 'app-clima',
@@ -12,7 +15,9 @@ import { Router } from '@angular/router';
   templateUrl: './clima.component.html',
   styleUrls: ['./clima.component.css']
 })
-export class ClimaComponent {
+export class ClimaComponent{
+  weatherData!: WeatherForecast;
+
   ciudad: string = '';
   clima: any = null;
   pronostico: any[] = [];
@@ -21,8 +26,22 @@ export class ClimaComponent {
 
   constructor(
     private climaService: ClimaService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute,
+    private weatherService: WeatherService,
   ) {}
+
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      if (params['ciudad']) {
+        this.ciudad = params['ciudad'];
+        this.consultarClima();
+      } else {
+        // Si no hay ciudad en los parámetros, redirigir a la pestaña de clima
+        this.router.navigate(['/clima']);
+      }
+    });
+  }
 
   consultarClima() {
     if (this.ciudad.trim() === '') {
@@ -37,13 +56,13 @@ export class ClimaComponent {
         this.isSearched = true;
 
         // Simula datos de pronóstico (puedes reemplazar esto con una llamada a la API)
-        this.pronostico = [
+        /*this.pronostico = [
           { fecha: 'Lun', temp: 25, iconUrl: 'https://cdn-icons-png.flaticon.com/512/1163/1163661.png' },
           { fecha: 'Mar', temp: 27, iconUrl: 'https://cdn-icons-png.flaticon.com/512/1163/1163661.png' },
           { fecha: 'Mié', temp: 24, iconUrl: 'https://cdn-icons-png.flaticon.com/512/1163/1163661.png' },
           { fecha: 'Jue', temp: 22, iconUrl: 'https://cdn-icons-png.flaticon.com/512/1163/1163661.png' },
           { fecha: 'Vie', temp: 26, iconUrl: 'https://cdn-icons-png.flaticon.com/512/1163/1163661.png' }
-        ];
+        ];*/
       },
       (error: any) => {
         this.clima = null;
@@ -58,6 +77,4 @@ export class ClimaComponent {
       this.router.navigate(['/pronostico'], { queryParams: { ciudad: this.ciudad } });
     }
   }
-
-
 }

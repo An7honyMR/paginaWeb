@@ -17,7 +17,7 @@ export class HomeComponent {
 
   buscarCiudad() {
     if (this.ciudad.trim() !== ''){
-      this.router.navigate(['/clima'], { queryParams: { city: this.ciudad } });
+      this.router.navigate(['/clima'], { queryParams: { ciudad: this.ciudad } });
     }
   }
 
