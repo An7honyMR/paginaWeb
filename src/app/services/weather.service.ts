@@ -10,6 +10,7 @@ import { WeatherForecast } from '../models/weather';
 export class WeatherService {
   private apiKey = '405b9f75cbb2f52d6dbc085904e0867c';
   private apiUrl = 'https://api.openweathermap.org/data/2.5/forecast';
+  private backendUrl = 'http://localhost:3000/rest/pronosticoClima/save'; // URL para guardar el clima en el backend
 
   constructor(private http: HttpClient) { }
 
@@ -17,4 +18,8 @@ export class WeatherService {
     return this.http.get<WeatherForecast>(`${this.apiUrl}?q=${city}&units=metric&appid=${this.apiKey}&lang=es`);
   }
 
+  // Guardar el pronóstico extendido en el backend
+  saveWeatherForecast(forecast: any): Observable<any> {
+    return this.http.post(this.backendUrl, forecast); // Guardar en el backend
+  }
 }

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ClimaService } from '../../services/clima.service';
 import { Router } from '@angular/router';
+import { Clima } from '../../models/clima';
 
 @Component({
   selector: 'app-clima',
@@ -18,6 +19,7 @@ export class ClimaComponent {
   pronostico: any[] = [];
   error: string | null = null;
   isSearched: boolean = false; // Agregado para controlar la visibilidad del botón
+  cargando: boolean = false;  // Propiedad cargando añadida
 
   constructor(
     private climaService: ClimaService,
@@ -53,11 +55,52 @@ export class ClimaComponent {
     );
   }
 
+  obtenerYGuardarClima(ciudad: string): void {
+    this.cargando = true;
+    this.error = '';
+  
+    this.climaService.getClima(ciudad).subscribe({
+      next: (respuestaAPI) => {
+        // Crear un objeto con la estructura definida en la interfaz Clima
+        const climaFormateado: Clima = {
+          name: respuestaAPI.name,
+          main: {
+            temp: respuestaAPI.main.temp,
+            humidity: respuestaAPI.main.humidity
+          },
+          weather: respuestaAPI.weather.map(w => ({
+            description: w.description,
+            icon: w.icon
+          })),
+          wind: {
+            speed: respuestaAPI.wind.speed
+          }
+        };
+  
+        // Guardar el clima en el backend
+        this.climaService.guardarClima(climaFormateado).subscribe({
+          next: (respuestaBackend) => {
+            console.log('Clima guardado exitosamente:', respuestaBackend);
+            this.cargando = false;
+          },
+          error: (err) => {
+            this.error = 'Error al guardar clima en el backend: ' + err.message;
+            console.error('Error al guardar:', err);
+            this.cargando = false;
+          }
+        });
+      },
+      error: (err) => {
+        this.error = 'Error al obtener datos del clima: ' + err.message;
+        console.error('Error al obtener datos:', err);
+        this.cargando = false;
+      }
+    });
+  }  
+
   verPronosticoCompleto() {
     if (this.ciudad) {
       this.router.navigate(['/pronostico'], { queryParams: { ciudad: this.ciudad } });
     }
   }
-
-
 }
