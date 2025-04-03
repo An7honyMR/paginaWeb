@@ -1,61 +1,151 @@
-<div class="forecast-container">
-    <div class="pronostico-container">
-      <h2>Pronóstico del Clima en {{ city }}</h2>
-      
-      <!-- Indicador de carga -->
-      <div *ngIf="!weatherData || !weatherData.list" class="loading-spinner">
-        <div class="spinner"></div>
-      </div>
-      
-      <div *ngIf="weatherData && weatherData.list">
-        <!-- Sección de clima actual -->
-        <div class="weather-card">
-          <img [src]="'https://openweathermap.org/img/wn/' + weatherData.list[0].weather[0].icon + '@4x.png'" 
-               alt="icono del clima" class="weather-icon">
-          <h3 class="temperature">{{ weatherData.list[0].main.temp | number:'1.0-0' }}°C</h3>
-          <p class="info">{{ weatherData.list[0].weather[0].description }}</p>
-        </div>
-        
-        <div class="weather-info">
-          <p>🌡️ <strong>Humedad:</strong> {{ weatherData.list[0].main.humidity }}%</p>
-          <p>💨 <strong>Viento:</strong> {{ weatherData.list[0].wind.speed }} m/s</p>
-          <p>🌧️ <strong>Estado:</strong> {{ weatherData.list[0].weather[0].description }}</p>
-        </div>
-        
-        <h3>Pronóstico de los próximos días</h3>
-        <div class="forecast-grid">
-          <ng-container *ngFor="let item of weatherData.list; let i = index">
-            <div *ngIf="i % 8 === 0" class="forecast-card">
-              <img [src]="'https://openweathermap.org/img/wn/' + item.weather[0].icon + '@2x.png'" alt="icono del clima">
-              <p class="forecast-date">{{ item.dt_txt | date: 'EEEE, dd MMM' }}</p>
-              <p class="forecast-temp">{{ item.main.temp | number:'1.0-0' }}°C</p>
-              <p class="forecast-desc">{{ item.weather[0].description }}</p>
-            </div>
-          </ng-container>
-        </div>
-        
-        <!-- Información adicional -->
-        <div class="additional-info mt-4">
-          <h3>Información adicional</h3>
-          <div class="info-item">
-            <span class="info-title">🌡️ Sensación Térmica:</span>
-            <span class="info-value">{{ weatherData.list[0].main.feels_like | number:'1.0-0' }}°C</span>
-          </div>
-          <div class="info-item">
-            <span class="info-title">🌧️ Probabilidad de Lluvia:</span>
-            <span class="info-value">{{ weatherData.list[0].pop ? (weatherData.list[0].pop * 100 | number:'1.0-0') : 0 }}%</span>
-          </div>
-          <div class="info-item">
-            <span class="info-title">📊 Presión Atmosférica:</span>
-            <span class="info-value">{{ weatherData.list[0].main.pressure }} hPa</span>
-          </div>
-          <div class="info-item">
-            <span class="info-title">🕒 Última Actualización:</span>
-            <span class="info-value">{{ weatherData.list[0].dt_txt | date: 'hh:mm a' }}</span>
-          </div>
-        </div>
-      </div>
-      
-      <button class="btn btn-primary mt-3" (click)="volverAClima()">Volver</button>
+<div class="weather-dashboard">
+  <!-- Header con ciudad y fecha -->
+  <!-- <header class="weather-header">
+    <button class="back-button" (click)="volverAClima()">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <div class="location-info">
+      <h1>{{ weatherData ? weatherData.ciudad : city }}</h1>
+      <p class="current-date">{{ fecha | date:'fullDate' }}</p>
     </div>
+    <div class="weather-mood">
+      <i class="fas fa-map-marker-alt"></i>
+      <span>{{ weatherData?.pais || '' }}</span>
+    </div>
+  </header> -->
+
+  <!-- Estado de carga -->
+  <div *ngIf="!weatherData" class="loading-state">
+    <div class="loading-spinner">
+      <i class="fas fa-cloud-sun fa-spin"></i>
+    </div>
+    <p>Obteniendo datos meteorológicos...</p>
   </div>
+
+  <!-- Contenido principal -->
+  <main *ngIf="weatherData" class="weather-grid">
+    <!-- Tarjeta principal del clima -->
+    <section class="current-weather card">
+      <div class="temperature-display">
+        <span class="temp-value">{{ weatherData.pronosticos[0].temperatura | number:'1.0-0' }}</span>
+        <span class="temp-unit">°C</span>
+      </div>
+      <div class="weather-meta">
+        <img [src]="'https://openweathermap.org/img/wn/' + weatherData.pronosticos[0].icono + '@4x.png'" 
+             alt="Weather icon" class="weather-icon">
+        <p class="weather-description">{{ weatherData.pronosticos[0].descripcion | titlecase }}</p>
+      </div>
+    </section>
+
+    <!-- Estadísticas rápidas -->
+    <section class="weather-stats card">
+      <div class="stat-item">
+        <i class="fas fa-tint"></i>
+        <div>
+          <span>Humedad</span>
+          <strong>{{ weatherData.pronosticos[0].humedad }}%</strong>
+        </div>
+      </div>
+      <div class="stat-item">
+        <i class="fas fa-wind"></i>
+        <div>
+          <span>Viento</span>
+          <strong>{{ weatherData.pronosticos[0].viento }} m/s</strong>
+        </div>
+      </div>
+      <div class="stat-item">
+        <i class="fas fa-compress-alt"></i>
+        <div>
+          <span>Presión</span>
+          <strong>1012 hPa</strong>
+        </div>
+      </div>
+      <div class="stat-item">
+        <i class="fas fa-eye"></i>
+        <div>
+          <span>Visibilidad</span>
+          <strong>10 km</strong>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pronóstico por horas -->
+    <section class="hourly-forecast card">
+      <h2 class="section-title">
+        <i class="fas fa-clock"></i>
+        <span>Próximas Horas</span>
+      </h2>
+      <div class="hours-container">
+        <div *ngFor="let hour of weatherData.pronosticos.slice(0, 6)" class="hour-item">
+          <p class="hour">{{ hour.hora }}</p>
+          <img [src]="'https://openweathermap.org/img/wn/' + hour.icono + '@2x.png'" 
+               alt="Weather icon" class="hour-icon">
+          <p class="temp">{{ hour.temperatura | number:'1.0-0' }}°</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pronóstico semanal -->
+    <section class="weekly-forecast card">
+      <h2 class="section-title">
+        <i class="fas fa-calendar-alt"></i>
+        <span>Próximos Días</span>
+      </h2>
+      <div class="days-container">
+        <div *ngFor="let day of filteredForecast" class="day-item">
+          <p class="day">{{ day.fecha | date:'EEE' }}</p>
+          <img [src]="'https://openweathermap.org/img/wn/' + day.icono + '@2x.png'" 
+               alt="Weather icon" class="day-icon">
+          <p class="temp">{{ day.temperatura | number:'1.0-0' }}°</p>
+          <p class="description">{{ day.descripcion | titlecase }}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mapa y detalles adicionales -->
+    <section class="weather-map card">
+      <h2 class="section-title">
+        <i class="fas fa-map-marked-alt"></i>
+        <span>Ubicación</span>
+      </h2>
+      <div class="map-placeholder">
+        <i class="fas fa-globe-americas"></i>
+        <p>Mapa de {{ weatherData.ciudad }}</p>
+      </div>
+      <div class="coordinates">
+        <div>
+          <span>Latitud</span>
+          <strong>{{ weatherData.coordenadas.lat | number:'1.4-4' }}</strong>
+        </div>
+        <div>
+          <span>Longitud</span>
+          <strong>{{ weatherData.coordenadas.lon | number:'1.4-4' }}</strong>
+        </div>
+      </div>
+    </section>
+
+    <!-- Detalles astronómicos -->
+    <section class="astronomy card">
+      <h2 class="section-title">
+        <i class="fas fa-star"></i>
+        <span>Astronomía</span>
+      </h2>
+      <div class="sun-moon">
+        <div class="sun-times">
+          <i class="fas fa-sun"></i>
+          <div>
+            <span>Amanecer</span>
+            <strong>6:45 AM</strong>
+          </div>
+        </div>
+        <div class="moon-times">
+          <i class="fas fa-moon"></i>
+          <div>
+            <span>Atardecer</span>
+            <strong>6:30 PM</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>

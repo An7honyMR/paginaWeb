@@ -10,12 +10,12 @@
 
         <!-- Información del Clima -->
         <div *ngIf="clima">
-            <img [src]="'https://openweathermap.org/img/wn/' + clima.weather[0].icon + '@2x.png'" class="weather-icon" alt="Icono clima">
+            <!-- <img [src]="'https://openweathermap.org/img/wn/' + clima.weather[0].icon + '@2x.png'" class="weather-icon" alt="Icono clima"> -->
             <h2>{{ clima.name }}</h2>
-            <p class="temp">{{ clima.main.temp }}°C</p>
-            <p class="info">{{ clima.weather[0].description }}</p>
-            <p class="info"><strong>Humedad:</strong> {{ clima.main.humidity }}%</p>
-            <p class="info"><strong>Viento:</strong> {{ clima.wind.speed }} km/h</p>
+            <p class="temp">{{ clima.temp }}°C</p>
+            <p class="info">{{ clima.description }}</p>
+            <p class="info"><strong>Humedad:</strong> {{ clima.humidity }}%</p>
+            <p class="info"><strong>Viento:</strong> {{ clima.windSpeed }} km/h</p>
         </div>
     </div>
 

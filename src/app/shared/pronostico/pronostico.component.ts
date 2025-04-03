@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WeatherService } from '../../services/weather.service';
-import { WeatherForecast } from '../../models/weather';
+import { WeatherForecast, Pronostico } from '../../models/weather';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -12,8 +12,9 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./pronostico.component.css']
 })
 export class PronosticoComponent implements OnInit {
-  weatherData!: WeatherForecast;
+  weatherData: WeatherForecast | null = null;
   city: string = '';
+  filteredForecast: Pronostico[] = [];
 
   constructor(
     private weatherService: WeatherService,
@@ -27,16 +28,27 @@ export class PronosticoComponent implements OnInit {
         this.city = params['ciudad'];
         this.getForecast();
       } else {
-        // Si no hay ciudad en los parámetros, redirigir a la pestaña de clima
         this.router.navigate(['/clima']);
       }
     });
   }
 
   getForecast(): void {
-    this.weatherService.getWeatherForecast(this.city).subscribe(data => {
-      this.weatherData = data;
+    this.weatherService.getWeatherForecast(this.city).subscribe({
+      next: (data) => {
+        this.weatherData = data;
+        this.filteredForecast = this.filterForecastData(data.pronosticos);
+      },
+      error: (error) => {
+        console.error('Error fetching forecast:', error);
+        // Manejo de errores opcional
+      }
     });
+  }
+
+  private filterForecastData(pronosticos: Pronostico[]): Pronostico[] {
+    // Filtramos para mostrar un pronóstico por día (asumiendo 8 pronósticos por día)
+    return pronosticos.filter((item, index) => index % 8 === 0);
   }
 
   volverAClima() {
